@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11182f">
+  <meta name="description" content="พื้นที่เล็ก ๆ สำหรับคนสองคนที่อยากดูแลกันในทุกวัน">
+  <title>Our Little Moon 🌙</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="stars" aria-hidden="true">✦　 ·　 ✧　 ·　 ✦　 ·　 ✧</div>
+
+  <main class="app">
+
+    <!-- ส่วนเข้าสู่ระบบด้วย PIN -->
+    <section id="loginPanel" class="medicine-card">
+      <div class="card-heading">
+        <div class="pill-icon">☾</div>
+        <div>
+          <p class="label">OUR LITTLE MOON</p>
+          <h2>พื้นที่ของเราสองคน</h2>
+        </div>
+      </div>
+
+      <p class="subtitle">
+        กรอกรหัส PIN 4 หลัก<br>
+        เพื่อเปิดบันทึกของเรา
+      </p>
+
+      <form id="loginForm">
+        <label for="pinInput" class="label">รหัส PIN</label>
+
+        <input
+          id="pinInput"
+          name="pin"
+          type="password"
+          inputmode="numeric"
+          pattern="[0-9]{4}"
+          minlength="4"
+          maxlength="4"
+          autocomplete="current-password"
+          placeholder="••••"
+          aria-describedby="loginMessage"
+          required
+        >
+
+        <button
+          id="loginButton"
+          class="primary-button"
+          type="submit"
+        >
+          ☾ เข้าสู่พื้นที่ของเรา
+        </button>
+
+        <p id="loginMessage" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- เนื้อหาหลักของเว็บไซต์ -->
+    <div id="appContent" hidden>
+      <header class="header">
+        <div class="moon">☾</div>
+        <p class="eyebrow">OUR LITTLE MOON</p>
+        <h1>คืนนี้เราดูแลกันนะ</h1>
+        <p class="subtitle">
+          พื้นที่เล็ก ๆ สำหรับคนสองคน<br>
+          ที่อยากดูแลกันในทุกวัน
+        </p>
+      </header>
+
+      <section class="date-card">
+        <p class="label">วันนี้ · OUR DAY</p>
+        <h2 id="today">กำลังโหลดวันที่...</h2>
+        <p id="clock" class="clock">--:--:--</p>
+      </section>
+
+      <section class="medicine-card">
+        <div class="card-heading">
+          <div class="pill-icon">♡</div>
+          <div>
+            <p class="label">DAILY REMINDER</p>
+            <h2>บันทึกของวันนี้</h2>
+          </div>
+        </div>
+
+        <div class="reminder-time">
+          <span>เวลากินยา · เวลาไต้หวัน</span>
+          <strong id="reminderTime">21:30 น.</strong>
+        </div>
+
+        <div
+          id="status"
+          class="status pending"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="status-dot"></span>
+          <span id="statusText">กำลังโหลดข้อมูล...</span>
+        </div>
+
+        <p id="recordTime" class="record-time">
+          เมื่อบันทึกแล้ว เวลาจะปรากฏตรงนี้
+        </p>
+
+        <button id="takenButton" class="primary-button" type="button">
+          ♡ บันทึกว่ากินยาแล้ว
+        </button>
+
+        <button
+          id="undoButton"
+          class="secondary-button"
+          type="button"
+          hidden
+        >
+          แก้ไขสถานะกลับเป็นยังไม่มีบันทึก
+        </button>
+
+        <p class="small-note">
+          บันทึกนี้ใช้จดจำสิ่งที่คุณยืนยันไว้
+          ไม่ใช่การยืนยันทางการแพทย์
+        </p>
+      </section>
+
+      <section class="history-card">
+        <div class="history-heading">
+          <div>
+            <p class="label">OUR LITTLE JOURNAL</p>
+            <h2>บันทึก 7 วันที่ผ่านมา</h2>
+          </div>
+          <span class="history-icon">✧</span>
+        </div>
+
+        <div id="history" class="history-list"></div>
+      </section>
+
+      <footer>
+        <div class="footer-heart">♡</div>
+        <p>ไม่ต้องจำทุกอย่างไว้คนเดียว</p>
+        <p>เราช่วยกันได้เสมอ</p>
+        <span>made with love, for us</span>
+
+        <button id="logoutButton" class="secondary-button" type="button">
+          ออกจากระบบ
+        </button>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
