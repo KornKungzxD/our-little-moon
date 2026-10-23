@@ -13,14 +13,26 @@
   --border: #35405d;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+}
+
 body {
-  margin: 0;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
+  margin: 0;
   padding: 30px 16px;
+  overflow-x: clip;
   font-family: 'Kanit', sans-serif;
   color: var(--text);
   background:
@@ -29,8 +41,20 @@ body {
     linear-gradient(145deg, #10172f, #17172f 60%, #29203e);
 }
 
-button {
+button,
+input,
+textarea {
+  max-width: 100%;
   font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 .stars {
@@ -46,52 +70,59 @@ button {
 }
 
 .app {
+  position: relative;
   width: 100%;
   max-width: 480px;
+  min-width: 0;
   margin: 20px auto;
-  position: relative;
 }
 
 .header {
-  text-align: center;
+  min-width: 0;
   padding: 18px 8px 28px;
+  text-align: center;
 }
 
 .moon {
+  color: var(--lavender);
   font-size: 58px;
   line-height: 1.3;
-  color: var(--lavender);
   text-shadow: 0 0 35px #c9bcff65;
 }
 
 .eyebrow,
 .label {
+  margin: 0 0 8px;
   color: var(--lavender);
   font-size: 11px;
   letter-spacing: 2px;
-  margin: 0 0 8px;
 }
 
 h1 {
+  margin: 8px 0;
   font-size: clamp(24px, 6vw, 32px);
   font-weight: 500;
-  margin: 8px 0;
+  overflow-wrap: anywhere;
 }
 
 .subtitle {
   color: var(--muted);
-  line-height: 1.9;
   font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
 }
 
 .date-card,
 .medicine-card,
 .history-card {
-  background: linear-gradient(145deg, #1c2744ee, #191e39f5);
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-bottom: 16px;
+  padding: 22px;
   border: 1px solid var(--border);
   border-radius: 24px;
-  padding: 22px;
-  margin-bottom: 16px;
+  background: linear-gradient(145deg, #1c2744ee, #191e39f5);
   box-shadow: 0 16px 40px #00000018;
 }
 
@@ -100,16 +131,18 @@ h1 {
 }
 
 .date-card h2 {
+  margin: 10px 0;
   font-size: 20px;
   font-weight: 400;
-  margin: 10px 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .clock {
-  color: var(--pink);
-  font-size: 27px;
-  font-weight: 500;
   margin: 0;
+  color: var(--pink);
+  font-size: clamp(23px, 6vw, 27px);
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 
@@ -118,12 +151,19 @@ h1 {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
+}
+
+.card-heading > *,
+.history-heading > * {
+  min-width: 0;
 }
 
 .pill-icon {
+  display: grid;
+  flex: 0 0 48px;
   width: 48px;
   height: 48px;
-  display: grid;
   place-items: center;
   border-radius: 16px;
   background: #3a3458;
@@ -132,46 +172,66 @@ h1 {
 }
 
 h2 {
-  font-weight: 500;
-  font-size: 19px;
   margin: 0;
+  font-size: 19px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
+/* Reminder time: stack label and time to prevent mobile overflow */
 .reminder-time {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   margin: 24px 0 16px;
   padding: 16px;
   border-radius: 14px;
   background: #ffffff08;
   color: var(--muted);
   font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .reminder-time strong {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   color: var(--pink);
-  font-size: 23px;
-  white-space: nowrap;
+  font-size: clamp(16px, 4.5vw, 23px);
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .status {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
+  min-width: 0;
   padding: 13px;
   border-radius: 12px;
   background: #ffffff08;
   font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .status-dot {
+  flex: 0 0 9px;
   width: 9px;
   height: 9px;
+  margin-top: 8px;
   border-radius: 50%;
   background: #f2c77b;
-  flex-shrink: 0;
 }
 
 .status.done {
@@ -184,20 +244,26 @@ h2 {
 }
 
 .record-time {
+  margin: 14px 0;
   color: var(--muted);
   font-size: 12px;
+  line-height: 1.8;
   text-align: center;
-  margin: 14px 0;
+  overflow-wrap: anywhere;
 }
 
 .primary-button,
 .secondary-button {
   display: block;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   padding: 15px 12px;
   border: 0;
   border-radius: 15px;
-  cursor: pointer;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
   transition: transform 0.15s, filter 0.15s;
 }
 
@@ -211,8 +277,8 @@ h2 {
 
 .secondary-button {
   margin-top: 10px;
-  background: #ffffff0a;
   border: 1px solid var(--border);
+  background: #ffffff0a;
   color: var(--muted);
   font-size: 12px;
 }
@@ -232,11 +298,12 @@ button:disabled {
 }
 
 .small-note {
+  margin: 16px 0 0;
+  color: var(--muted);
   font-size: 11px;
   line-height: 1.8;
   text-align: center;
-  color: var(--muted);
-  margin: 16px 0 0;
+  overflow-wrap: anywhere;
 }
 
 .history-heading {
@@ -245,34 +312,42 @@ button:disabled {
 }
 
 .history-icon {
-  font-size: 30px;
+  flex: 0 0 auto;
   color: var(--pink);
+  font-size: 30px;
 }
 
 .history-list {
   display: grid;
   gap: 9px;
+  min-width: 0;
 }
 
 .history-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  background: #ffffff06;
-  border-radius: 12px;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  min-width: 0;
   padding: 12px;
+  border-radius: 12px;
+  background: #ffffff06;
   font-size: 13px;
 }
 
 .history-date {
+  min-width: 0;
   color: var(--text);
+  overflow-wrap: anywhere;
 }
 
 .history-detail {
+  min-width: 0;
   color: var(--muted);
   font-size: 11px;
   text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .history-detail.done {
@@ -280,15 +355,15 @@ button:disabled {
 }
 
 .empty-history {
+  padding: 14px 0;
   color: var(--muted);
   font-size: 13px;
   text-align: center;
-  padding: 14px 0;
 }
 
 footer {
-  text-align: center;
   padding: 24px 8px;
+  text-align: center;
 }
 
 .footer-heart {
@@ -300,32 +375,94 @@ footer p {
   margin: 4px 0;
   color: #e6dff4;
   font-size: 13px;
+  overflow-wrap: anywhere;
 }
 
 footer span {
   display: block;
+  margin-top: 16px;
   color: var(--muted);
   font-size: 10px;
   letter-spacing: 2px;
-  margin-top: 16px;
+  overflow-wrap: anywhere;
 }
 
 [hidden] {
   display: none !important;
 }
 
-@media (max-width: 380px) {
+@media (max-width: 600px) {
   body {
     padding: 16px 12px;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 480px;
+    margin: 12px auto;
+  }
+
+  .header {
+    padding: 12px 4px 20px;
   }
 
   .date-card,
   .medicine-card,
   .history-card {
-    padding: 18px;
+    padding: clamp(16px, 4vw, 22px);
+    border-radius: 22px;
   }
 
   .reminder-time {
+    margin-top: 18px;
     padding: 12px;
+  }
+
+  .card-heading {
+    gap: 12px;
+  }
+
+  .date-card h2 {
+    font-size: clamp(17px, 5vw, 20px);
+  }
+
+  .history-item {
+    gap: 8px;
+  }
+
+  .history-detail {
+    text-align: left;
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    padding: 12px 8px;
+  }
+
+  .date-card,
+  .medicine-card,
+  .history-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .reminder-time {
+    padding: 11px;
+  }
+
+  .pill-icon {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+
+  .card-heading {
+    gap: 10px;
+  }
+
+  .clock {
+    font-size: 23px;
   }
 }

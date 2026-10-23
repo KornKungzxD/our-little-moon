@@ -120,7 +120,7 @@ function getTaiwanReminderAsLocalTime() {
     hourCycle: "h23",
   }).format(reminderInstant);
 
-  return `${localTime} น. (เวลาในเครื่อง) · 21:30 น. ไต้หวัน`;
+  return `${localTime} น. ไทย · 21:30 น. ไต้หวัน`;
 }
 
 function updateClock() {
